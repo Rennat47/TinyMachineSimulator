@@ -1,5 +1,10 @@
 Welcome to TinyMachineSimulator.jar
 
+This program provies a simulated visual representation of the Tiny Machine.
+
+Below you can find descriptions on what the buttons do and how the simulator
+will handle certain things/work in general.
+
 
 ---------------Loading files----------------------------------------------------
 Click load and select a .tm file to load it into the instruction memory
