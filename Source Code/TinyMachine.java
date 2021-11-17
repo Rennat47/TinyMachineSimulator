@@ -53,9 +53,14 @@ public class TinyMachine
 
 	public void start()
 	{
-		while(true) //Evil while loop >:). I did this because of some thread issues with the event dispatch thread making the call to run.
-		{			//So instead it just sets startProgram to true when you hit run instead of calling run so step mode still works
-			////System.out.println("waiting");
+		/*
+		 * Evil while loop >:). I did this because of some thread issues with the event dispatch thread making the call to run.
+		 * So instead it just sets startProgram to true when you hit run instead of calling run so step mode still works.
+		 * There is a better way to handle this with an entity that subscribes to some sort of trigger but this works and that's fine. 
+		 */
+		while(true) 
+		{			
+			//System.out.println("waiting" + startProgram);
 			try
 			{
 				Thread.sleep(100); //Just slows down the looping so it doesn't refresh as fast as possible
@@ -69,6 +74,7 @@ public class TinyMachine
 				runProgram();
 				startProgram = false;
 			}
+			//System.out.println(im.size());
 		}
 	}
 
@@ -76,8 +82,6 @@ public class TinyMachine
 	{
 		//isRunning = true;
 		halt = false;
-		clearRegisters();
-		dm[0] = dm.length - 1;
 		UI.dataMemoryTable.setValueAt(dm.length - 1, 0, 1);
 		while(!halt && register[PC_REG] < im.size())
 		{
@@ -113,6 +117,8 @@ public class TinyMachine
 				//This in theory should allow you to step through.
 			}
 		}
+		UI.output.append("HALTED\n");
+		halt = true; //This is here in-case there wasn't a halt and the loop ended due to running out of instructions 
 		//System.out.println("finished");
 		//isRunning = false;
 	}
@@ -146,6 +152,8 @@ public class TinyMachine
 		{
 			UI.dataMemoryTable.setValueAt(0, i, 1);
 		}
+		dm[0] = dm.length - 1;
+		UI.dataMemoryTable.setValueAt(dm[0], 0, 1); //Visually update the UI of this change in the line above
 	}
 
 	public void clearRegisters()
@@ -201,7 +209,6 @@ public class TinyMachine
 			int arg1 = i.getArg1();
 			int arg2 = i.getArg2();
 			int arg3 = i.getArg3();
-			UI.updateRegisterUI(register);
 			switch(type)
 			{
 			case HALT:
@@ -227,6 +234,12 @@ public class TinyMachine
 				break;
 			case LD:
 				LD(arg1, arg2, arg3);
+				break;
+			case LDA:
+				LDA(arg1, arg2, arg3);
+				break;
+			case LDC:
+				LDC(arg1, arg2, arg3);
 				break;
 			case ST:
 				ST(arg1, arg2, arg3);
