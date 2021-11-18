@@ -39,7 +39,7 @@ finishes the instruction it is currently on.
 
 -------------Toggle Stepping/Step--------------------------------------------------
 Clicking Toggle Stepping will put the simulator into step mode. You can 
-tell if step mode is on if the button is boxed by a green border.
+tell if step mode is on if the button colored green. (Green = on).
 While in step mode the program will not execute instructions unless
 you click the step button. You must click the run program first to
 do the first step and start the program. Then you can click the step
