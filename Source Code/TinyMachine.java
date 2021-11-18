@@ -57,7 +57,9 @@ public class TinyMachine
 		 * Evil while loop >:). I did this because of some thread issues with the event dispatch thread making the call to run.
 		 * So instead it just sets startProgram to true when you hit run instead of calling run so step mode still works.
 		 * There is a better way to handle this with an entity that subscribes to some sort of trigger but this works and that's fine. 
+		 * TODO replace with wait() and notify() 
 		 */
+		
 		while(true) 
 		{			
 			//System.out.println("waiting" + startProgram);
@@ -623,6 +625,7 @@ public class TinyMachine
 				if (im.size() > 0 && halt)
 				{
 					startProgram = true;
+					//notifyAll();
 					//System.out.println("started " + startProgram);
 				}
 			}
@@ -757,13 +760,14 @@ public class TinyMachine
 				{
 					isPaused = true;
 					stepMode = true;
-					UI.toggleStep.setBorderPainted(true);
-					UI.toggleStep.setBorder(BorderFactory.createLineBorder(Color.GREEN)); //Visual feedback that it's on
+					//UI.toggleStep.setBorderPainted(true);
+					UI.toggleStep.setBackground(Color.green);
+					//UI.toggleStep.setBorder(BorderFactory.createLineBorder(Color.GREEN)); //Visual feedback that it's on
 				} else
 				{
 					isPaused = false;
 					stepMode = false;
-					UI.toggleStep.setBorderPainted(false);
+					//UI.toggleStep.setBorderPainted(false);
 					UI.toggleStep.setBackground(Color.WHITE);
 				}
 			}

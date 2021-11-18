@@ -20,7 +20,10 @@ public class TinyMachineUI
 	public JTable dataMemoryTable, instructionMemoryTable, nexttInstructionTable;
 	public JScrollPane dataScroller, instructionScroller, nextInstructionScroller;
 	public JMenuBar menuBar;
-	public JMenu load, reset, run, setDelay, stop, toggleStep, step;		
+	//public JMenuBar menuBar;
+	//public JMenu load, reset, run, setDelay, stop, toggleStep, step;		
+	public JToolBar toolBar;
+	public JButton load, reset, run, setDelay, stop, toggleStep, step;	
 	
 	public TinyMachineUI()
 	{
@@ -213,21 +216,33 @@ public class TinyMachineUI
 	
 	private void createMenuBar()
 	{
+//		menuBar = new JMenuBar();
+//		load = new JMenu("Load");
+//		reset = new JMenu("Reset");
+//		run = new JMenu("Run");
+//		setDelay = new JMenu("Set Delay");
+//		stop = new JMenu("Stop");
+//		toggleStep = new JMenu("Toggle Stepping");
+//		step = new JMenu("Step");
+		
+		toolBar = new JToolBar();
+		load = new JButton("Load");
+		reset = new JButton("Reset");
+		run = new JButton("Run");
+		setDelay = new JButton("Set Delay");
+		stop = new JButton("Stop");
+		toggleStep = new JButton("Toggle Stepping");
+		step = new JButton("Step");
+		toolBar.add(load);
+		toolBar.add(reset);
+		toolBar.add(run);
+		toolBar.add(setDelay);
+		toolBar.add(stop);
+		toolBar.add(toggleStep);
+		toolBar.add(step);
+		toolBar.setFloatable(false);
 		menuBar = new JMenuBar();
-		load = new JMenu("Load");
-		reset = new JMenu("Reset");
-		run = new JMenu("Run");
-		setDelay = new JMenu("Set Delay");
-		stop = new JMenu("Stop");
-		toggleStep = new JMenu("Toggle Stepping");
-		step = new JMenu("Step");
-		menuBar.add(load);
-		menuBar.add(reset);
-		menuBar.add(run);
-		menuBar.add(setDelay);
-		menuBar.add(stop);
-		menuBar.add(toggleStep);
-		menuBar.add(step);
+		menuBar.add(toolBar);
 	}
 	
 	public JTable buildCustomTable(Object [][] rowData, Object [] colNames)
